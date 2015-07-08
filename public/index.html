@@ -1,13 +1,13 @@
 <!doctype html>
 
 <!-- ASSIGN OUR ANGULAR MODULE -->
-<html ng-app="scotchTodo">
+<html ng-app="opsTools">
 <head>
 	<!-- META -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
 
-	<title>Node/Angular Todo App</title>
+	<title>Leapset OPS tools</title>
 
 	<!-- SCROLLS -->
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
@@ -15,15 +15,17 @@
 	<style>
 		html 					{ overflow-y:scroll; }
 		body 					{ padding-top:50px; }
-		#todo-list 				{ margin-bottom:30px; }
-		#todo-form 	 			{ margin-bottom:50px; }
+		#opstool-list 				{ margin-bottom:30px; }
+		#opstool-form 	 			{ margin-bottom:50px; }
 	</style>
 
 	<!-- SPELLS -->
 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script><!-- load angular -->
-
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css" />
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 	<script src="js/controllers/main.js"></script> <!-- load up our controller -->
-	<script src="js/services/todos.js"></script> <!-- load our todo service -->
+	<script src="js/services/toolservice.js"></script> <!-- load our opstools service -->
 	<script src="js/core.js"></script> <!-- load our main application -->
 
 </head>
@@ -33,21 +35,14 @@
 
 		<!-- HEADER AND TODO COUNT -->
 		<div class="jumbotron text-center">
-			<h1>I'm a Todo-aholic <span class="label label-info">{{ todos.length }}</span></h1>
+			<h1>Leapset <span class="label label-info">OPS Tools</span></h1>
 		</div>
 
 		<!-- TODO LIST -->
-		<div id="todo-list" class="row">
+		<div id="opstool-list" class="row">
 			<div class="col-sm-4 col-sm-offset-4">
 
 				
-
-				<!-- LOOP OVER THE TODOS IN $scope.todos -->
-				<div class="checkbox" ng-repeat="todo in todos">
-					<label>
-						<input type="checkbox" ng-click="deleteTodo(todo._id)"> {{ todo.text }}
-					</label>
-				</div>
 
 				<p class="text-center" ng-show="loading">
 					<span class="fa fa-spinner fa-spin fa-3x"></span>
@@ -57,24 +52,28 @@
 		</div>
 
 		<!-- FORM TO CREATE TODOS -->
-		<div id="todo-form" class="row">
+		<div id="opstool-form" class="row">
 			<div class="col-sm-8 col-sm-offset-2 text-center">
 				<form>
 					<div class="form-group">
 
 						<!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
-						<input type="text" class="form-control input-lg text-center" placeholder="I want to buy a puppy that will love me forever" ng-model="formData.text">
+						<input id="tags" type="text" class="form-control input-lg text-center" placeholder="Enter merchant's name here" ng-model="formData.text" ng-keyup="complete()">
 					</div>
 
 					<!-- createToDo() WILL CREATE NEW TODOS -->
-					<button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">Add</button>
+					<button id="cinco" class="btn btn-primary btn-lg" data-ng-click="btnClick($event)">Cinco</button>
+					<button id="couch" class="btn btn-primary btn-lg" data-ng-click="btnClick($event)">Couch</button>
+					<button id="terminal" class="btn btn-primary btn-lg" data-ng-click="btnClick($event)">Terminal</button>
+					<button id="pwd" class="btn btn-primary btn-lg" data-ng-click="btnClick($event)">Pass</button>
+					<h4>{{pwdtext}}</h4>
 				</form>
 			</div>
 		</div>
 
 		<div class="text-center text-muted">
-			<p>A demo by <a href="http://scotch.io">Scotch</a>.</p>
-			<p>Read the <a href="http://scotch.io/tutorials/javascript/creating-a-single-page-todo-app-with-node-and-angular">tutorial</a>.</p>
+			<p>Production POS access <a href="http://scotch.io">Tool</a>.</p>
+			<p>Read the <a href="#">wiki page</a>.</p>
 		</div>
 
 	</div>
