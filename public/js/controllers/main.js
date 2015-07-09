@@ -83,6 +83,7 @@ angular.module('opsToolsController', [])
 	    	var merchant = $( "#tags" ).val();
 	    	var duration = 0;
 	    	if(mapping[merchant].tunnel == ""){
+	    		$scope.pwdtext = "Opening a tunnel";
 	    		ws.send(JSON.stringify({name: "agent:tunnel", data: {id: mapping[merchant].key }}));
 	    		duration = 10000;
 	    	}
@@ -105,6 +106,7 @@ angular.module('opsToolsController', [])
 	    		if(mapping[merchant].tunnel == ""){
 	    			$scope.pwdtext = "Error getting a tunnel";
 	    		}else{
+	    			$scope.pwdtext = "Tunnel opened";
 	    			params.tunnel = mapping[merchant].tunnel;
 		    		if(type == "cinco"){
 			    		currentCommands = ToolService.genCincoCommands(params);
