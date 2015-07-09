@@ -3,7 +3,10 @@
   "version": "0.0.0",
   "description": "Leapset ops tools",
   "main": "server.js",
-  "author": "Scotch",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Eranga",
   "dependencies": {
     "express": "~4.6.1",
     "mongoose": "~3.8.13",
