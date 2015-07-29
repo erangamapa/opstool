@@ -8,7 +8,6 @@ angular.module('opsToolsController', [])
 		var collection = [];
 		var mapping = {};
 		var tunnelPort = 6000;
-		var currentUsername = "erangam";
 		var index = 0;
 		var tunnelCreated = false;
 		var cincoLoaded = false;
@@ -82,6 +81,12 @@ angular.module('opsToolsController', [])
 	    	$scope.loading = true;
 	    	var merchant = $( "#tags" ).val();
 	    	var duration = 0;
+	    	if(mapping[merchant] === undefined){
+	    		$scope.pwdtext = "Please select a merchant register";
+	    		$scope.$apply();
+	    		$scope.loading = false;
+	    		return;
+	    	}
 	    	if(mapping[merchant].tunnel == ""){
 	    		$scope.pwdtext = "Opening a tunnel";
 	    		ws.send(JSON.stringify({name: "agent:tunnel", data: {id: mapping[merchant].key }}));
@@ -99,15 +104,19 @@ angular.module('opsToolsController', [])
 			params.version = mapping[merchant].version;
 			params.merchant_id =  mapping[merchant].merchant_id;
 			params.port = tunnelPort;
-			params.username = currentUsername;
+			params.username = $( "#uname" ).val();
 			params.couchPort = couchPort;
 			index = 0;
 	    	setTimeout(function(){
-	    		if(mapping[merchant].tunnel == ""){
+	    		if(params.username == ""){
+	    			$scope.pwdtext = "Username is not provided";
+	    		    $scope.loading = false;
+	    		}else if(mapping[merchant].tunnel == ""){
 	    			$scope.pwdtext = "Error getting a tunnel";
 	    		}else{
 	    			$scope.pwdtext = "Tunnel opened";
 	    			params.tunnel = mapping[merchant].tunnel;
+	    			params.uname = uname;
 		    		if(type == "cinco"){
 			    		currentCommands = ToolService.genCincoCommands(params);
 			    	}else if(type == "couch"){
@@ -121,6 +130,7 @@ angular.module('opsToolsController', [])
 					webSocket.send(currentCommands[index]);
 					index++;
 	    		}
+	    		$scope.$apply();
 	    	}, duration);
 		};
 	}]);
