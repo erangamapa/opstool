@@ -18,9 +18,20 @@ angular.module('opsToolsController', [])
 		webSocket.onopen = function(){  
 	        console.log("Agent opened");  
 	    };
+	    webSocket.onerror=function(event){
+		    console.log("Error accessing local agent");
+		    $scope.pwdtext = " Error accessing local agent";
+		    $scope.$apply();
+		};
 
 	    ws.onopen = function(){  
 	        console.log("tunnel creator opened");  
+	    };
+
+	    ws.onerror = function(){  
+	        console.log("Error accessing tunnel agent");
+		    $scope.pwdtext = " Error accessing tunnel agent";
+		    $scope.$apply(); 
 	    };
 
 	    webSocket.onmessage = function(message){
