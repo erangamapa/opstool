@@ -125,7 +125,7 @@ angular.module('opsToolsController', [])
 	    		}else if(mapping[merchant].tunnel == ""){
 	    			$scope.pwdtext = "Error getting a tunnel";
 	    		}else{
-	    			$scope.pwdtext = "Tunnel opened";
+	    			$scope.pwdtext = "Tunnel " + mapping[merchant].tunnel + " opened";
 	    			params.tunnel = mapping[merchant].tunnel;
 	    			params.uname = uname;
 		    		if(type == "cinco"){
